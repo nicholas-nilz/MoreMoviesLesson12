@@ -1,5 +1,7 @@
 package sg.edu.rp.c346.id22014726.mymovies;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,9 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-public class UpdateMovie extends AppCompatActivity {
+public class UpdateMovie1 extends AppCompatActivity {
 
     TextView id;
     Button cancel;
@@ -30,7 +30,7 @@ public class UpdateMovie extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update);
+        setContentView(R.layout.activity_update_movie1);
 
         id = findViewById(R.id.id);
         title = findViewById(R.id.etTitle);
@@ -53,7 +53,7 @@ public class UpdateMovie extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder myBuilder = new AlertDialog.Builder(UpdateMovie.this);
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(UpdateMovie1.this);
                 myBuilder.setTitle("Danger");
                 myBuilder.setMessage("Are you sure you want to discard the changes made.");
 
@@ -61,9 +61,9 @@ public class UpdateMovie extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                    onBackPressed();
-            }
-        });
+                        onBackPressed();
+                    }
+                });
                 myBuilder.setPositiveButton("DO NOT DISCARD", null);
                 AlertDialog myDialog = myBuilder.create();
                 myDialog.show();
@@ -94,7 +94,7 @@ public class UpdateMovie extends AppCompatActivity {
                         break;
 
                 }
-                Toast.makeText(UpdateMovie.this, "Selected: " + stRatings, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdateMovie1.this, "Selected: " + stRatings, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -107,7 +107,7 @@ public class UpdateMovie extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                DBHelper dbh = new DBHelper(UpdateMovie.this);
+                DBHelper dbh = new DBHelper(UpdateMovie1.this);
                 data.setTitle(title.getText().toString());
                 data.setGenre(genre.getText().toString());
                 data.setYear(Integer.valueOf(year.getText().toString()));
@@ -122,14 +122,14 @@ public class UpdateMovie extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder myBuilder = new AlertDialog.Builder(UpdateMovie.this);
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(UpdateMovie1.this);
                 myBuilder.setTitle("Danger");
                 myBuilder.setMessage("Are you sure you want to delete the movie\n" + String.valueOf(data.getTitle()) + ".");
 
                 myBuilder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        DBHelper db = new DBHelper(UpdateMovie.this);
+                        DBHelper db = new DBHelper(UpdateMovie1.this);
                         db.deleteMovie(data.getId());
                         finish();
                     }

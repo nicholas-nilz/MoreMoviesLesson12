@@ -43,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
         aa = new ArrayAdapter<Movie>(this,
                 android.R.layout.simple_list_item_1, al);
 
+        // Create a string array for the ratings
+        String[] ratingsArray = {"G", "PG", "PG13", "NC16", "M18", "R21"};
+
+        // Create an ArrayAdapter for the ratings Spinner
+        ArrayAdapter<String> ratingsAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, ratingsArray);
+
+        // Set the ArrayAdapter to the ratings Spinner
+        ratings.setAdapter(ratingsAdapter);
+
      ratings.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -83,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
             String stTitle = String.valueOf(title.getText());
             String stGenre = String.valueOf(genre.getText());
-            int iYear = Integer.valueOf(String.valueOf(year.getText()));
+            int iYear = Integer.parseInt(String.valueOf(year.getText()));
             db.insertMovie(stTitle, stGenre, iYear, stRatings);
             Toast.makeText(MainActivity.this, "Movie successfully added", Toast.LENGTH_SHORT).show();
         }
@@ -94,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         display.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, DisplayMovie.class);
+            Intent intent = new Intent(MainActivity.this, DIsplayMovie1.class);
             startActivity(intent);
         }
     });
