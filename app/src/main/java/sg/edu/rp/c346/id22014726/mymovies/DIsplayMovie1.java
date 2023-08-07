@@ -81,11 +81,6 @@ public class DIsplayMovie1 extends AppCompatActivity {
             }
 
         });
-
-
-
-
-
     }
 
 }
