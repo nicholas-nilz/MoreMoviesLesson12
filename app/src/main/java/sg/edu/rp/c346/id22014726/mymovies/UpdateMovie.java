@@ -1,5 +1,7 @@
 package sg.edu.rp.c346.id22014726.mymovies;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -50,7 +52,21 @@ public class UpdateMovie extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(UpdateMovie.this);
+                myBuilder.setTitle("Danger");
+                myBuilder.setMessage("Are you sure you want to discard the changes made.");
+
+                myBuilder.setNegativeButton("DISCARD", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    onBackPressed();
+            }
+        });
+                myBuilder.setPositiveButton("DO NOT DISCARD", null);
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
             }
         });
 
@@ -90,6 +106,7 @@ public class UpdateMovie extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 DBHelper dbh = new DBHelper(UpdateMovie.this);
                 data.setTitle(title.getText().toString());
                 data.setGenre(genre.getText().toString());
@@ -104,9 +121,22 @@ public class UpdateMovie extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DBHelper db = new DBHelper(UpdateMovie.this);
-                db.deleteMovie(data.getId());
-                finish();
+
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(UpdateMovie.this);
+                myBuilder.setTitle("Danger");
+                myBuilder.setMessage("Are you sure you want to delete the movie\n" + String.valueOf(data.getTitle()) + ".");
+
+                myBuilder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DBHelper db = new DBHelper(UpdateMovie.this);
+                        db.deleteMovie(data.getId());
+                        finish();
+                    }
+                });
+                myBuilder.setPositiveButton("CANCEL", null);
+                AlertDialog myDialog = myBuilder.create();
+                myDialog.show();
             }
         });
 
